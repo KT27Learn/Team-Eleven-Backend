@@ -1,0 +1,868 @@
+{
+	"info": {
+		"_postman_id": "d699eae0-933d-4c73-8f06-e978fd17d2e0",
+		"name": "Orbital Backend Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "favourites request tests",
+			"item": [
+				{
+					"name": "get favourite logs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.result.userid).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.result.favouriteslog).to.be.a('Array');",
+									"    pm.expect(responseJson.result.favouriteslog[0]).to.be.a('Object');",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userid\": \"60e58161d575f5079bcb032f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/favourites/userlog",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"favourites",
+								"userlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favourite new method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.result.userid).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.result.favouriteslog).to.be.a('Array');",
+									"    pm.expect(responseJson.result.favouriteslog[2]).to.be.a('Object');",
+									"    pm.expect(responseJson.result.favouriteslog[2].studymethodid).to.eql('60acfde8dc675f12e89d9f01');",
+									"    pm.expect(responseJson.result.favouriteslog[2].studymethodname).to.eql('Animedoro');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userid\": \"60e58161d575f5079bcb032f\",\n    \"googleId\" : \"117232504082174655709\",\n    \"studymethodid\": \"60acfde8dc675f12e89d9f01\",\n    \"studymethodname\": \"Animedoro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/favourites/favourite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"favourites",
+								"favourite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfavourite a method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.result.userid).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.result.favouriteslog).to.be.a('Array');",
+									"    pm.expect(responseJson.result.favouriteslog.length).to.eql(2);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userid\": \"60e58161d575f5079bcb032f\",\n    \"studymethodid\": \"60acfde8dc675f12e89d9f01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/favourites/unfavourite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"favourites",
+								"unfavourite"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "library requests test",
+			"item": [
+				{
+					"name": "get entire library",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check get request successfully went through",
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson).to.be.a('Array');",
+									"    pm.expect(responseJson.length).to.eql(5);",
+									"    pm.expect(responseJson[0]).to.be.a('Object');",
+									"    pm.expect(responseJson[0]._id).to.eql('60a8e6df674d300608bb3cdf');",
+									"    pm.expect(responseJson[0].name).to.eql('90 Minute Focus Session');",
+									"    pm.expect(responseJson[0].studytime).to.eql(90);",
+									"    pm.expect(responseJson[0].breaktime).to.eql(20);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {}
+						},
+						"url": {
+							"raw": "http://localhost:5000/library/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"library",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check get request successfully went through",
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson).to.be.a('Object');",
+									"    pm.expect(responseJson._id).to.eql('60a8e6df674d300608bb3cdf');",
+									"    pm.expect(responseJson.name).to.eql('90 Minute Focus Session');",
+									"    pm.expect(responseJson.studytime).to.eql(90);",
+									"    pm.expect(responseJson.breaktime).to.eql(20);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/library/60a8e6df674d300608bb3cdf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"library",
+								"60a8e6df674d300608bb3cdf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rooms request tests",
+			"item": [
+				{
+					"name": "get all rooms",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check get request successfully went through",
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson).to.be.a('Array');",
+									"    pm.expect(responseJson.length).to.eql(5);",
+									"    pm.expect(responseJson[0]).to.be.a('Object');",
+									"    pm.expect(responseJson[0]._id).to.eql('60d9e8e68019850022d07547');",
+									"    pm.expect(responseJson[0].roomname).to.eql('Testing for Orbital');",
+									"    pm.expect(responseJson[0].creatorid).to.eql('77470f20-d824-11eb-bef1-1548dfdd4266');",
+									"    pm.expect(responseJson[0].username).to.eql(\"Keith Tan\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/rooms/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"rooms",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sessions request tests",
+			"item": [
+				{
+					"name": "get all past logs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.session).to.be.a('Array');",
+									"    pm.expect(responseJson.session[0]).to.be.a('Object');",
+									"    pm.expect(responseJson.session[0].userid).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.session[0].tasks).to.be.a('Array');",
+									"    pm.expect(responseJson.session[0].tasks[0]).to.be.a('Object');",
+									"    pm.expect(responseJson.session[0].studymethod).to.eql('90 Minute Focus Session');",
+									"    pm.expect(responseJson.session[1].userid).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.session[1].studymethod).to.eql('Pomodoro');",
+									"    pm.expect(responseJson.session[1].tasks).to.be.a('Array');",
+									"    pm.expect(responseJson.session[1].tasks[0]).to.be.a('Object');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userid\": \"60e58161d575f5079bcb032f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/session/past",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"session",
+								"past"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log new session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.session).to.be.a('Object');",
+									"    pm.expect(responseJson.session.userid).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.session.tasks).to.be.a('Array');",
+									"    pm.expect(responseJson.session.studymethod).to.eql('Testing Functionality');",
+									"    pm.expect(responseJson.session.cumulatedtime).to.eql(9);",
+									"    pm.expect(responseJson.session.cumulatedstudytime).to.eql(6);",
+									"    pm.expect(responseJson.session.cumulatedbreaktime).to.eql(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"userid\": \"60e58161d575f5079bcb032f\", \n   \"googleId\": \"117232504082174655709\",\n    \"studymethod\": \"Testing Functionality\",\n    \"cumulatedtime\" : 9, \n    \"cumulatedstudytime\" : 6, \n    \"cumulatedbreaktime\" : 3,\n    \"tasks\" : [] \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/session/log",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"session",
+								"log"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users request tests",
+			"item": [
+				{
+					"name": "successful login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.result).to.be.a('Object');",
+									"    pm.expect(responseJson.token).to.be.a('String');",
+									"    pm.expect(responseJson.result._id).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.result.password).to.be.a('String');",
+									"    pm.expect(responseJson.result.email).to.eql('eleventest123@gmail.com');",
+									"    pm.expect(responseJson.result.googleId).to.eql('117232504082174655709');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eleventest123@gmail.com\",\n    \"password\": \"Pokemon1@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unsuccessful login (wrong password)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"unsuccessful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.message).to.be.a('String');",
+									"    pm.expect(responseJson.message).to.eql('Invalid credentials');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eleventest123@gmail.com\",\n    \"password\": \"ClassyAF1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unsuccessful login (no such email)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"unsuccessful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.message).to.be.a('String');",
+									"    pm.expect(responseJson.message).to.eql(\"User doesn't exist\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test123\",\n    \"password\": \"Pokemon1@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "successful google login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.result).to.be.a('Object');",
+									"    pm.expect(responseJson.token).to.be.a('String');",
+									"    pm.expect(responseJson.result._id).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.result.password).to.be.a('String');",
+									"    pm.expect(responseJson.result.email).to.eql('eleventest123@gmail.com');",
+									"    pm.expect(responseJson.result.googleId).to.eql('117232504082174655709');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"name\": \"eleven test\",\n    \"email\": \"eleventest123@gmail.com\",\n    \"googleId\": \"117232504082174655709\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/googlesignin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"googlesignin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update bio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.bio).to.be.a('String');",
+									"    pm.expect(responseJson.bio).to.eql('Postman Test123');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"updatedBio\": \"Postman Test123\",\n    \"email\": \"eleventest123@gmail.com\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/updatebio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"updatebio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set password for google accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.message).to.be.a('String');",
+									"    pm.expect(responseJson.message).to.eql('Password successfully changed!');",
+									"    pm.expect(responseJson.user).to.be.a('Object');",
+									"    pm.expect(responseJson.user._id).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.user.name).to.eql('eleven test');",
+									"    pm.expect(responseJson.user.email).to.eql('eleventest123@gmail.com');",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eleventest123@gmail.com\",\n    \"password\": \"Pokemon1@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/setpassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"setpassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password for accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.message).to.be.a('String');",
+									"    pm.expect(responseJson.message).to.eql('Password successfully changed!');",
+									"    pm.expect(responseJson.user).to.be.a('Object');",
+									"    pm.expect(responseJson.user._id).to.eql('60e58161d575f5079bcb032f');",
+									"    pm.expect(responseJson.user.name).to.eql('eleven test');",
+									"    pm.expect(responseJson.user.email).to.eql('eleventest123@gmail.com');",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eleventest123@gmail.com\",\n    \"password\": \"Pokemon1@\",\n    \"newPassword\": \"Pokemon1@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/changepassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"changepassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unsucecessful change password for accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check post request successfully went through",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"//check correct details retrieved",
+									"pm.test(\"Correct Details Retrieved\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.message).to.be.a('String');",
+									"    pm.expect(responseJson.message).to.eql('Invalid Password');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eleventest123@gmail.com\",\n    \"password\": \"ClassyAF1\",\n    \"newPassword\": \"Pokemon1@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/changepassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"changepassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
